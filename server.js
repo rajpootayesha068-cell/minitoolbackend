@@ -16,11 +16,10 @@ const app = express();
 // =====================
 // ENV VARIABLES
 // =====================
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+const JWT_SECRET = process.env.JWT_SECRET || "";
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || "";
-const GOOGLE_REDIRECT_URI =
-  process.env.GOOGLE_REDIRECT_URI ||
+const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI ||
   "http://localhost:3000/auth/google/callback";
 
 // =====================
@@ -289,12 +288,18 @@ app.post("/plagiarism", async (req, res) => {
 // =====================
 // LOCAL SERVER START (Development Only)
 // =====================
-if (process.env.NODE_ENV !== "production") {
+/* if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`);
   });
-}
+} */
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
 
 // =====================
 // VERCEL EXPORT (For Production)
